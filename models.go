@@ -1,4 +1,4 @@
-package models
+package gobetterauth
 
 import "time"
 

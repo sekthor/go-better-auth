@@ -3,8 +3,6 @@ package gobetterauth
 import (
 	"fmt"
 	"net/http"
-
-	"github.com/sekthor/go-better-auth/models"
 )
 
 type SignInEmailRequest struct {
@@ -21,12 +19,12 @@ type SignUpEmailRequest struct {
 }
 
 type SignInEmailResponse struct {
-	User models.User `json:"user"`
+	User User `json:"user"`
 }
 
 type GetSessionResponse struct {
-	Session models.Session `json:"session"`
-	User    models.User    `json:"user"`
+	Session Session `json:"session"`
+	User    User    `json:"user"`
 }
 
 func (c *Client) SignUpEmail(req SignUpEmailRequest) (SignInEmailResponse, error) {

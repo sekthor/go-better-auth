@@ -5,29 +5,14 @@ import (
 	"net/http"
 	"net/url"
 	"time"
-
-	"github.com/sekthor/go-better-auth/models"
 )
 
 type ExtendedUser struct {
-	models.User
+	User
 	Role       string
 	Banned     bool
 	BanReason  string
 	BanExpires time.Time
-}
-
-type ListUserQuery struct {
-	SearchValue    string
-	SearchField    string
-	SearchOperator string
-	Limit          int
-	Offset         int
-	SortBy         string
-	SortDirection  string
-	FilterField    string
-	FilterValue    string
-	FilterOperator string
 }
 
 type ListUsersResponse struct {
