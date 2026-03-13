@@ -7,13 +7,14 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 )
 
 type ApiError struct {
 	Message string `json:"message"`
 }
 
-func DoApiRequest[T any](client Client, method string, url string, reqBody any) (T, error) {
+func invokeApiRequest[T any](client *http.Client, method string, url string, reqBody any, params url.Values) (T, error) {
 	var body io.Reader
 	var entity T
 
@@ -33,7 +34,11 @@ func DoApiRequest[T any](client Client, method string, url string, reqBody any) 
 
 	req.Header.Add("Content-Type", "application/json")
 
-	res, err := client.getClient().Do(req)
+	if params != nil {
+		req.URL.RawQuery = params.Encode()
+	}
+
+	res, err := client.Do(req)
 	if err != nil {
 		return entity, err
 	}
